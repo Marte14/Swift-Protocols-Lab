@@ -1,39 +1,61 @@
 
 ## Protocols Lab
 
-## Instructions for lab submission 
 
-1. Fork the assignment repo
-1. Clone your Fork to your machine
-1. Complete the lab
-1. Push your changes to your Fork
-1. Submit a Pull Request back to the assignment repo
-1. Paste a link of the pull request on Canvas and submit
-
-<pre> 
 Question 1.
-Create a Human class with two properties: name of type String, and age of type Int. You'll need to 
-create a memberwise initializer for the class. Initialize two Human instances.
 
-Make the Human class adopt the CustomStringConvertible. Print both of your previously initialized
-Human objects.
+'''Swift
 
-Make the Human class adopt the Equatable protocol. Two instances of Human should be considered equal
-if their names and ages are identical to one another. Print the result of a boolean expression 
-evaluating whether or not your two previously initialized Human objects are equal to eachother
-(using ==). Then print the result of a boolean expression evaluating whether or not your two
-previously initialized Human objects are not equal to eachother (using !=).
+class Human : CustomStringConvertible, Equatable, Comparable{
 
-Make the Human class adopt the Comparable protocol. Sorting should be based on age. Create another
-three instances of a Human, then create an array called people of type [Human] with all of the
-Human objects that you have initialized. Create a new array called sortedPeople of type [Human] 
-that is the people array sorted by age.
-</pre> 
+var description: String {
+return "Person\'s name is \(name) and their age is \(age)"
+}
 
-</br> </br> 
+var name : String
+var age : Int
+
+init(name: String, age: Int){
+self.name = name
+self.age = age
+
+}
+static func == (lhs: Human, rhs: Human)-> Bool {
+return lhs.name == rhs.name  && lhs.age == rhs.age
+
+}
+static func < (lhs: Human, rhs: Human) -> Bool {
+return lhs.age < rhs.age
+}
+
+// print("\(name) is \(age) years young")
+}
+
+var People : [Human] = []
+let latty = Human(name: "Latty", age: 24)
+let lanyAlso = Human(name:"Lany", age : 10)
+let lany = Human(name: "Lany" , age : 10)
+let gordon = Human(name: "Gordon" , age : 34)
+let john = Human(name: "John", age: 26)
+let katty = Human(name: "katty", age: 23)
+
+People.append(latty)
+People.append(lanyAlso)
+People.append(lany)
+People.append(gordon)
+People.append(john)
+
+if john == katty {
+print("They are the same person")
+}else{
+print("They are different persons")
+}
+
+let sortedByAge = [john, katty].sorted { $0 < $1 }
 
 
-<pre> 
+'''
+
 Question 2. 
 Create a protocol called Vehicle with two requirements: a nonsettable numberOfWheels property of
 type Int, and a function called drive().
@@ -45,11 +67,12 @@ then call drive().
 Define a Bike struct that implements the Vehicle protocol. numberOfWheels should return a value of 2,
 and drive() should print "Begin pedaling!". Create an instance of Bike, print its number of wheels,
 then call drive().
-</pre>  
 
-</br> </br> 
 
-<pre> 
+
+
+
+
 Question 3. 
 // Given the below two protocols, create a struct for penguin(a flightless bird) and an eagle.
 Give your structs some properties and have them conform to the appropriate protocols.
@@ -62,11 +85,12 @@ protocol Bird {
 protocol Flyable {
  var airspeedVelocity: Double { get }
 }
-</pre> 
 
-</br> </br> 
 
-<pre>
+
+
+
+
 Question 4. 
 // Create a protocol called Transformation
 
